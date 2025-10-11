@@ -6,7 +6,7 @@ section	.text
 	
 _start:                   
 	mov ebx, msg + 23
-	mov [ebx], 'X'
+	mov [ebx], 'W'
 	
 	mov edx, msg		; edx = dirección de la cadena msg
 	call puts			; imprime cadena msg terminada en valor nulo (0)
