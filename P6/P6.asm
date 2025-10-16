@@ -29,6 +29,28 @@ _start:                     ;tell linker entry point
 
 	mov al,10       ; cambio de linea
 	call putchar
+	call putchar
+
+	mov ebx, 0x5C4B2A60
+	mov eax, 0x02219522
+	add ebx, eax
+	mov eax, ebx
+	call pHex_dw
+
+	mov al,10       
+	call putchar
+	call putchar
+
+	push ebx
+	pop eax
+	call pHex_w
+	
+	mov al,10
+	call putchar
+
+	mov al,8
+	mul bl
+	call pHex_w
 
 	mov eax, 1	;system call number (sys_exit) -- fin del programa
 	int 0x80        ;call kernel
