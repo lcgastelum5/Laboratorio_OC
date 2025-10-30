@@ -12,6 +12,7 @@ section	.text
 
 _start:                   
 
+	;inciso A
 	mov eax, 0x22446688
 	ror eax, 4
 	call pHex_dw
@@ -20,6 +21,7 @@ _start:
 	call putchar
 	call putchar
 
+	;inciso B
 	mov cx, 0x3F48
 	shl cx, 3
 	mov ax,cx
@@ -29,6 +31,7 @@ _start:
 	call putchar
 	call putchar
 
+	;inciso C
 	mov esi, 0x20D685F3
 	mov eax,esi
 	call pBin_dw
@@ -43,6 +46,7 @@ _start:
 	call putchar
 	call putchar
 
+	;inciso D
 	push esi
 	pop eax
 	call pBin_dw
@@ -51,6 +55,7 @@ _start:
 	call putchar
 	call putchar
 
+	;inciso E
 	mov ch, 0xA7
 	mov al, ch
 	call pBin_b
@@ -65,6 +70,7 @@ _start:
 	call putchar
 	call putchar
 
+	;inciso F
 	mov bp, 0x67DA
 	mov ax,bp
 	call pBin_w 
@@ -78,6 +84,7 @@ _start:
 	call putchar
 	call putchar
 
+	;inciso G
 	shr bp,3
 	mov ax,bp
 	call pBin_w
@@ -86,6 +93,7 @@ _start:
 	call putchar
 	call putchar
 
+	;inciso H
 	mov ebx, 0x5BD20E6A
 	shr ebx,5
 	mov eax, ebx
@@ -95,6 +103,7 @@ _start:
 	call putchar
 	call putchar
 
+	;inciso I
 	shl cx, 3
 	mov ax,cx
 	call pBin_w
@@ -103,6 +112,7 @@ _start:
 	call putchar
 	call putchar
 
+	;inciso J
 	mov eax, 0x1503ADE0
 	push eax
 	pop ebx
@@ -114,8 +124,16 @@ _start:
 	call putchar
 	call putchar
 
+	;inciso K
+	mov eax, esi
+    shl eax, 3       ; eax = esi * 8
+    mov edx, esi
+    shl edx, 1       ; edx = esi * 2
+    add eax, edx     ; eax = 10 * esi
+	call pBin_dw
 
-
+	mov al,10
+	call putchar
 
 	
 	mov	eax, 1	    	; seleccionar llamada al sistema para fin de programa
