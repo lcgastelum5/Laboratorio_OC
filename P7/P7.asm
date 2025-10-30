@@ -126,10 +126,10 @@ _start:
 
 	;inciso K
 	mov eax, esi
-    shl eax, 3       ; eax = esi * 8
+    shl eax, 3     
     mov edx, esi
-    shl edx, 1       ; edx = esi * 2
-    add eax, edx     ; eax = 10 * esi
+    shl edx, 1      
+    add eax, edx     
 	call pBin_dw
 
 	mov al,10
