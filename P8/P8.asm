@@ -74,7 +74,7 @@ _start:
 	mov cx,0
 	mov bx,10
 .arr: call getche
-	push ax
+	mov dx, ax
 	mov al,10
 	call putchar
 	inc cx
@@ -83,12 +83,12 @@ _start:
 	mov edx, msgdc
 	call puts
 
-	add esp, 20
 	mov cx,0
 	mov bx,10
-	.pil: pop ax
+	.pil: 
 	call putchar
-	add esp, 2
+	mov al,10
+	call putchar
 	inc cx
 	cmp bx, cx
 	ja .pil
