@@ -10,10 +10,13 @@ section .data
 	msgle	db	'El caracter es una letra',0xa,0
 	msgnu	db	'El caracter es un numero',0xa,0
 	msgdc	db	'Datos capturados', 0xa,0
+	arreglo	times 10 db	0
 	
 _start:                   
 
+
 	;inciso A
+	
 	call getche
 	mov bl, 'm'
 	cmp al, bl
@@ -32,7 +35,10 @@ _start:
 	call putchar
 	call putchar
 
+
+
 	;inciso B 
+
 	call getche
 	mov bl,'A'
 	cmp al,bl
@@ -51,7 +57,10 @@ _start:
 	call putchar
 	call putchar
 
+
+
 	;inciso C
+
 	mov cx, 8
 	mov bx, 0
 	.ast: mov dx, cx
@@ -70,27 +79,30 @@ _start:
 	call putchar
 	call putchar
 
+
+
 	;inciso D
-	mov cx,0
-	mov bx,10
+
+	mov ecx,0
+	mov ebx,10
 .arr: call getche
-	mov dx, ax
+	mov [arreglo + ecx], al
 	mov al,10
 	call putchar
-	inc cx
-	cmp bx, cx
+	inc ecx
+	cmp ebx, ecx
 	ja .arr
 	mov edx, msgdc
 	call puts
 
-	mov cx,0
-	mov bx,10
-	.pil: 
+	mov ecx,0
+	mov ebx,10
+.pil: mov al, [arreglo + ecx]
 	call putchar
 	mov al,10
 	call putchar
-	inc cx
-	cmp bx, cx
+	inc ecx
+	cmp ebx, ecx
 	ja .pil
 
 
