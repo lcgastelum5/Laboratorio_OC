@@ -5,20 +5,19 @@ N equ 10
 section	.data
 
 arregloa times 10 db 0
-arreglob db 1, 2, 3, 4, 5, 6, 7, 8 ,9, 10
+arreglob db 1, 2, 3, 4, 5, 6, 7, 8 , 9, 10
+arregloc db 2, 4, 6, 8, 10, 12, 14, 16, 18, 20
 
 section	.text
 	global _start       ;referencia para inicio de programa
 	
 _start:                   
 	
-    call inciso_a
-    call inciso_b
 
+ call inciso_a
+ call inciso_b
+ call inciso_c
 
-
-;inciso c
-    mov ecx,N
 
 
 
@@ -37,23 +36,20 @@ _start:
 
     inciso_a:
             mov ecx, N
-            mov ebx, 0
-            mov dl, 9
+            mov ebx, arregloa
             cmp ecx, 10
             ja .outa
-
         .va: call getch
             sub al, 30h
-            cmp dl , al
-            jae .valid
+            cmp al , 9
+            jbe .valid
             jmp .va
 
-        .valid: mov [arregloa + ecx], al
+        .valid: mov [ebx], al
             add al, 30h
             call putchar
             call puts_sl
             inc ebx
-            cmp ecx, ebx
             loop .va
             call puts_sl
         .outa: ret
@@ -61,16 +57,34 @@ _start:
 
     inciso_b:
             mov ecx, N
-            mov ebx, 0
+            mov ebx, arreglob
             cmp ecx, 10
             ja .outb
-            mov eax, N
+        .vb: mov eax, N
             sub eax, ecx
-        .vb: mov al, [ecx + ebx]
+            mov al, [ebx]
             call pHex_b
             call puts_sl
             inc ebx
-            cmp ecx, ebx
-            loopne .vb
+            loop .vb
+            call puts_sl
         .outb: ret
+
+
+    inciso_c:
+            mov ecx, N
+            mov ebx, arreglob
+            mov edx, arregloc
+            cmp ecx, 10
+            ja .outc
+        .vc: mov al, [ebx]
+            add al, [edx]
+            mov [ebx], al
+            call pHex_b
+            call puts_sl
+            inc ebx
+            inc edx
+            loop .vc
+            call puts_sl
+        .outc: ret
 
