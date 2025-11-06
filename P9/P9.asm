@@ -64,7 +64,9 @@ _start:
             mov ebx, 0
             cmp ecx, 10
             ja .outb
-        .vb: mov al, [arreglob + ebx]
+            mov eax, N
+            sub eax, ecx
+        .vb: mov al, [ecx + ebx]
             call pHex_b
             call puts_sl
             inc ebx
