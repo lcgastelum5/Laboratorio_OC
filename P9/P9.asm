@@ -39,7 +39,7 @@ _start:
             mov ecx, N
             mov ebx, 0
             mov dl, 9
-            cmp ecx, 9
+            cmp ecx, 10
             ja .outa
 
         .va: call getch
@@ -62,11 +62,13 @@ _start:
     inciso_b:
             mov ecx, N
             mov ebx, 0
+            cmp ecx, 10
+            ja .outb
         .vb: mov al, [arreglob + ebx]
             call pHex_b
             call puts_sl
             inc ebx
             cmp ecx, ebx
-            loop .vb
-            ret
+            loopne .vb
+        .outb: ret
 
