@@ -7,19 +7,36 @@ section	.data
 arregloa times 10 db 0
 arreglob db 1, 2, 3, 4, 5, 6, 7, 8 , 9, 10
 arregloc db 2, 4, 6, 8, 10, 12, 14, 16, 18, 20
+sum dw 0
 
 section	.text
 	global _start       ;referencia para inicio de programa
 	
 _start:                   
 	
-
+;llenado de ambos vectores
+ mov ebx, arreglob
  call inciso_a
- call inciso_b
+ mov ebx, arregloc
+ call inciso_a
+
+;suma de vectores
  call inciso_c
 
-
-
+ ;producto punto de vectores
+ mov ecx, N
+ mov ebx, arreglob
+ mov esi, arregloc
+ .vd: mov al, [ebx]
+ mov dl, [esi]
+ mul dl
+ add [sum], ax
+ inc ebx
+ inc esi
+ loop .vd
+ mov ax, [sum]
+ call pHex_w
+ call puts_sl
 
 
 	mov	eax, 1	    	; seleccionar llamada al sistema para fin de programa
@@ -36,7 +53,6 @@ _start:
 
     inciso_a:
             mov ecx, N
-            mov ebx, arregloa
             cmp ecx, 10
             ja .outa
         .va: call getch
