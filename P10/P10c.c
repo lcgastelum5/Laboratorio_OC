@@ -9,6 +9,7 @@ int a=2;
 int b=3;
 
 Suma(a, b);
+printf("%d", Suma);
 
 return 0;
 }
