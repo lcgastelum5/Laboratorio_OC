@@ -1,6 +1,6 @@
 #include <stdio.h>
-extern Suma (int a, int b)
 
+extern int Suma (int a, int b);
 
 int main()
 {
