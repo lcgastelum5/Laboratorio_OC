@@ -87,7 +87,7 @@ pBin64b:
 	push ebp
 	mov ebp, esp
 	mov eax, [ebp+8]
-	mov edx, [ebp+12]
+	mov edx, [ebp+16]
 	push ebx
 	push edi
 
