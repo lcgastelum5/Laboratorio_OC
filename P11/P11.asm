@@ -1,20 +1,136 @@
-%include "../LIB/pc_io.inc"  	; incluir declaraciones de procedimiento externos
-								; que se encuentran en la biblioteca libpc_io.a
+
+global pBin8b
+global pBin16b
+global pBin32b
+global pBin64b
+
+extern putchar
 
 section	.text
-	global _start       ;referencia para inicio de programa
-	
-_start:      
 
-	mov al, 'Z'
-	mov [msg], al
 
-	mov edx, msg		; edx = dirección de la cadena msg
-	call puts			; imprime cadena msg terminada en valor nulo (0)
 
-	mov	eax, 1	    	; seleccionar llamada al sistema para fin de programa
-	int	0x80        	; llamada al sistema - fin de programa
 
-section	.data
-msg	db  'abcdefghijklmnopqrstuvwxyz0123456789',0xa,0 
+pBin8b:
+	push ebp
+	mov ebp, esp
+	mov eax, [ebp+8]
 
+	mov ecx, 8
+	mov edx, eax
+
+	.bin8:
+		shl dl, 1
+		jc .bit81
+		jmp .bit80
+	.bit81:
+		mov al, '1'
+		jmp .imp8
+	.bit80:
+		mov al, '0'
+	.imp8:
+		call myputchar
+		loop .bin8
+
+	pop ebp
+	ret
+
+pBin16b:
+	push ebp
+	mov ebp, esp
+	mov eax, [ebp+8]
+
+	mov ecx, 16
+	mov edx, eax
+
+	.bin16:
+		shl dx, 1
+		jc .bit161
+		jmp .bit160
+	.bit161:
+		mov al, '1'
+		jmp .imp16
+	.bit160:
+		mov al, '0'
+	.imp16:
+		call myputchar
+		loop .bin16
+
+	pop ebp
+	ret
+
+pBin32b:
+	push ebp
+	mov ebp, esp
+	mov eax, [ebp+8]
+
+	mov ecx, 32
+	mov edx, eax
+
+	.bin32:
+		shl edx, 1
+		jc .bit321
+		jmp .bit320
+	.bit321:
+		mov al, '1'
+		jmp .imp32
+	.bit320:
+		mov al, '0'
+	.imp32:
+		call myputchar
+		loop .bin32
+
+	pop ebp
+	ret
+
+pBin64b:
+	push ebp
+	mov ebp, esp
+	mov eax, [ebp+8]
+	mov ebx, [ebp+12]
+	push ebx
+	push edi
+
+	mov ecx, 32
+	mov edi, 2
+.ciclo:
+	cmp edi, 2
+	je .pmas
+	jmp .pmes
+
+.pmas:
+	mov edx, eax
+	jmp .bin64
+
+.pmes:
+	mov edx, ebx
+	.bin64:
+		shl edx, 1
+		jc .bit641
+		jmp .bit640
+	.bit641:
+		mov al, '1'
+		jmp .imp64
+	.bit640:
+		mov al, '0'
+	.imp64:
+		call myputchar
+		loop .bin64
+	dec edi
+	cmp edi, 0
+	ja .ciclo
+
+	pop edi
+	pop ebx
+	pop ebp
+	ret
+
+myputchar:
+	push edx
+	push ecx
+	push eax
+	call putchar
+	pop eax
+	pop ecx
+	pop edx
+	ret

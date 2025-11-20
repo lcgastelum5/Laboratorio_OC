@@ -1,20 +1,33 @@
-%include "../LIB/pc_io.inc"  	; incluir declaraciones de procedimiento externos
-								; que se encuentran en la biblioteca libpc_io.a
+#include <stdint.h>
+#include <stdio.h>
 
-section	.text
-	global _start       ;referencia para inicio de programa
-	
-_start:      
+extern void pBin8b(uint8_t dato1);
+extern void pBin16b(uint16_t dato2);
+extern void pBin32b(uint32_t dato3);
+extern void pBin64b(uint64_t dato4, uint64_t dato5);
 
-	mov al, 'Z'
-	mov [msg], al
 
-	mov edx, msg		; edx = dirección de la cadena msg
-	call puts			; imprime cadena msg terminada en valor nulo (0)
+int main()
+{
 
-	mov	eax, 1	    	; seleccionar llamada al sistema para fin de programa
-	int	0x80        	; llamada al sistema - fin de programa
 
-section	.data
-msg	db  'abcdefghijklmnopqrstuvwxyz0123456789',0xa,0 
+	uint8_t dato1=2;
+	pBin8b(dato1);
+	printf("\n");
 
+	uint16_t dato2=2;
+	pBin16b(dato2);
+	printf("\n");
+
+	uint32_t dato3=4;
+	pBin32b(dato3);
+	printf("\n");
+
+	uint64_t dato4=5;
+	uint64_t dato5=5;
+	pBin64b(dato4, dato5);
+	printf("\n");
+
+
+return 0;
+}
