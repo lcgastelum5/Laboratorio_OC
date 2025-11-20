@@ -87,25 +87,25 @@ pBin64b:
 	push ebp
 	mov ebp, esp
 	mov eax, [ebp+8]
-	mov ebx, [ebp+12]
+	mov edx, [ebp+12]
 	push ebx
 	push edi
 
-	mov ecx, 32
 	mov edi, 2
 .ciclo:
+	mov ecx, 32
 	cmp edi, 2
 	je .pmas
 	jmp .pmes
 
 .pmas:
-	mov edx, eax
+	mov ebx, eax
 	jmp .bin64
 
 .pmes:
-	mov edx, ebx
+	mov ebx, edx
 	.bin64:
-		shl edx, 1
+		shl ebx, 1
 		jc .bit641
 		jmp .bit640
 	.bit641:
@@ -118,7 +118,7 @@ pBin64b:
 		loop .bin64
 	dec edi
 	cmp edi, 0
-	ja .ciclo
+	jne .ciclo
 
 	pop edi
 	pop ebx

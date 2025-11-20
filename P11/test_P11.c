@@ -15,7 +15,7 @@ int main()
 	pBin8b(dato1);
 	printf("\n");
 
-	uint16_t dato2=2;
+	uint16_t dato2=3;
 	pBin16b(dato2);
 	printf("\n");
 
