@@ -4,7 +4,7 @@
 extern void pBin8b(uint8_t dato1);
 extern void pBin16b(uint16_t dato2);
 extern void pBin32b(uint32_t dato3);
-extern void pBin64b(uint64_t dato4, uint64_t dato5);
+extern void pBin64b(uint64_t dato4);
 
 
 int main()
@@ -24,8 +24,7 @@ int main()
 	printf("\n");
 
 	uint64_t dato4=5;
-	uint64_t dato5=5;
-	pBin64b(dato4, dato5);
+	pBin64b(dato4);
 	printf("\n");
 
 
